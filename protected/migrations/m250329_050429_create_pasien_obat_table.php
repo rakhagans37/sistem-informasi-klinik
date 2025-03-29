@@ -21,6 +21,7 @@ class m250329_050429_create_pasien_obat_table extends CDbMigration
 			'obat_id'           => 'integer',
 			'jumlah'            => 'integer NOT NULL',
 			'dosis'             => 'varchar(100)',
+			'wilayah_id'      => 'integer NOT NULL',
 			'tanggal_pemberian' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 			'catatan'           => 'text',
 			'created_at'        => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
@@ -51,6 +52,14 @@ class m250329_050429_create_pasien_obat_table extends CDbMigration
 			'master_obat',
 			'id',
 			'SET NULL',
+			'CASCADE'
+		);
+		$this->addForeignKey(
+			'fk_transaksi_obat_pasien_wilayah',
+			'transaksi_obat_pasien',
+			'wilayah_id',
+			'master_wilayah',
+			'id',
 			'CASCADE'
 		);
 	}

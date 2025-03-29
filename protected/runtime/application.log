@@ -285,3 +285,95 @@ Stack trace:
 #12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
 #13 {main}
 ---
+2025/03/29 07:50:11 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'klinik_db.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2025/03/29 07:50:13 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1005 Can't create table `klinik_db`.`transaksi_obat_pasien` (errno: 150 "Foreign key constraint is incorrectly formed"). The SQL statement executed was: ALTER TABLE `transaksi_obat_pasien` ADD CONSTRAINT `fk_transaksi_obat_pasien_dokter` FOREIGN KEY (`dokter_id`) REFERENCES `doctors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE.
+2025/03/29 07:50:13 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1005 Can't create table `klinik_db`.`transaksi_obat_pasien` (errno: 150 "Foreign key constraint is incorrectly formed"). The SQL statement executed was: ALTER TABLE `transaksi_obat_pasien` ADD CONSTRAINT `fk_transaksi_obat_pasien_dokter` FOREIGN KEY (`dokter_id`) REFERENCES `doctors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1463): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(366): CDbCommand->addForeignKey('fk_transaksi_ob...', 'transaksi_obat_...', 'dokter_id', 'doctors', 'id', 'SET NULL', 'CASCADE')
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_050429_create_pasien_obat_table.php(38): CDbMigration->addForeignKey('fk_transaksi_ob...', 'transaksi_obat_...', 'dokter_id', 'doctors', 'id', 'SET NULL', 'CASCADE')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_050429_create_pasien_obat_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_050429_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
+2025/03/29 07:56:52 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'klinik_db.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2025/03/29 07:56:54 [error] [php] include(m250329_050419_create_doctors_table.php): Failed to open stream: No such file or directory (C:\xampp\htdocs\yii\framework\YiiBase.php:463)
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\YiiBase.php(463): include()
+#1 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(459): autoload()
+#2 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(414): MigrateCommand->instantiateMigration()
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp()
+#4 unknown(0): MigrateCommand->actionUp()
+#5 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs()
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): MigrateCommand->run()
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run()
+#8 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#9 C:\xampp\htdocs\yii\framework\yiic.php(33): CConsoleApplication->run()
+#10 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once()
+#11 C:\xampp\htdocs\yii\protected\yiic(4): require_once()
+
+2025/03/29 07:58:24 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'klinik_db.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2025/03/29 07:58:25 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'klinik_db.transaksi_tindakan' doesn't exist. The SQL statement executed was: ALTER TABLE `transaksi_tindakan` ADD CONSTRAINT `fk_transaksi_tindakan_wilayah` FOREIGN KEY (`wilayah_id`) REFERENCES `master_wilayah` (`id`) ON DELETE SET NULL ON UPDATE CASCADE.
+2025/03/29 07:58:25 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'klinik_db.transaksi_tindakan' doesn't exist. The SQL statement executed was: ALTER TABLE `transaksi_tindakan` ADD CONSTRAINT `fk_transaksi_tindakan_wilayah` FOREIGN KEY (`wilayah_id`) REFERENCES `master_wilayah` (`id`) ON DELETE SET NULL ON UPDATE CASCADE in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1463): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(366): CDbCommand->addForeignKey('fk_transaksi_ti...', 'transaksi_tinda...', 'wilayah_id', 'master_wilayah', 'id', 'SET NULL', 'CASCADE')
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_050419_create_doctors_table.php(34): CDbMigration->addForeignKey('fk_transaksi_ti...', 'transaksi_tinda...', 'wilayah_id', 'master_wilayah', 'id', 'SET NULL', 'CASCADE')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_050419_create_doctors_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_050419_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
+2025/03/29 07:59:33 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'klinik_db.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2025/03/29 07:59:36 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1005 Can't create table `klinik_db`.`transaksi_obat_pasien` (errno: 150 "Foreign key constraint is incorrectly formed"). The SQL statement executed was: ALTER TABLE `transaksi_obat_pasien` ADD CONSTRAINT `fk_transaksi_obat_pasien_wilayah` FOREIGN KEY (`wilayah_id`) REFERENCES `master_wilayah` (`id`) ON DELETE SET NULL ON UPDATE CASCADE.
+2025/03/29 07:59:36 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1005 Can't create table `klinik_db`.`transaksi_obat_pasien` (errno: 150 "Foreign key constraint is incorrectly formed"). The SQL statement executed was: ALTER TABLE `transaksi_obat_pasien` ADD CONSTRAINT `fk_transaksi_obat_pasien_wilayah` FOREIGN KEY (`wilayah_id`) REFERENCES `master_wilayah` (`id`) ON DELETE SET NULL ON UPDATE CASCADE in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1463): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(366): CDbCommand->addForeignKey('fk_transaksi_ob...', 'transaksi_obat_...', 'wilayah_id', 'master_wilayah', 'id', 'SET NULL', 'CASCADE')
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_050429_create_pasien_obat_table.php(57): CDbMigration->addForeignKey('fk_transaksi_ob...', 'transaksi_obat_...', 'wilayah_id', 'master_wilayah', 'id', 'SET NULL', 'CASCADE')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_050429_create_pasien_obat_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_050429_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
+2025/03/29 08:01:36 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'klinik_db.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2025/03/29 08:01:39 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1005 Can't create table `klinik_db`.`transaksi_obat_pasien` (errno: 150 "Foreign key constraint is incorrectly formed"). The SQL statement executed was: ALTER TABLE `transaksi_obat_pasien` ADD CONSTRAINT `fk_transaksi_obat_pasien_wilayah` FOREIGN KEY (`wilayah_id`) REFERENCES `master_wilayah` (`id`) ON DELETE SET NULL ON UPDATE CASCADE.
+2025/03/29 08:01:39 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1005 Can't create table `klinik_db`.`transaksi_obat_pasien` (errno: 150 "Foreign key constraint is incorrectly formed"). The SQL statement executed was: ALTER TABLE `transaksi_obat_pasien` ADD CONSTRAINT `fk_transaksi_obat_pasien_wilayah` FOREIGN KEY (`wilayah_id`) REFERENCES `master_wilayah` (`id`) ON DELETE SET NULL ON UPDATE CASCADE in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1463): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(366): CDbCommand->addForeignKey('fk_transaksi_ob...', 'transaksi_obat_...', 'wilayah_id', 'master_wilayah', 'id', 'SET NULL', 'CASCADE')
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_050429_create_pasien_obat_table.php(57): CDbMigration->addForeignKey('fk_transaksi_ob...', 'transaksi_obat_...', 'wilayah_id', 'master_wilayah', 'id', 'SET NULL', 'CASCADE')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_050429_create_pasien_obat_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_050429_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---

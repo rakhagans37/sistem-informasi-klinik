@@ -15,6 +15,7 @@ class m250329_055608_create_pasien_tindakan_table extends CDbMigration
 			'pasien_id'        => 'integer NOT NULL',
 			'dokter_id'        => 'integer',
 			'tindakan_id'      => 'integer',
+			'wilayah_id'      => 'integer NOT NULL',
 			'tanggal_tindakan' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 			'catatan'          => 'text',
 			'biaya'            => 'numeric(10,2)',
@@ -46,6 +47,14 @@ class m250329_055608_create_pasien_tindakan_table extends CDbMigration
 			'master_tindakan',
 			'id',
 			'SET NULL',
+			'CASCADE'
+		);
+		$this->addForeignKey(
+			'fk_transaksi_tindakan_wilayah',
+			'transaksi_tindakan',
+			'wilayah_id',
+			'master_wilayah',
+			'id',
 			'CASCADE'
 		);
 	}

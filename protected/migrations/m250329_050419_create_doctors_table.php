@@ -1,10 +1,10 @@
 <?php
 
-class m250329_054909_create_doctors_table extends CDbMigration
+class m250329_050419_create_doctors_table extends CDbMigration
 {
 	public function down()
 	{
-		echo "m250329_054909_create_doctors_table does not support migration down.\n";
+		echo "m250329_050419_create_doctors_table does not support migration down.\n";
 		return false;
 	}
 
