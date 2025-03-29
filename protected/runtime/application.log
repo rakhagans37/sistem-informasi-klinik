@@ -1,0 +1,287 @@
+2025/03/29 07:12:48 [error] [exception.CDbException] CDbException: Adding a foreign key constraint to an existing table is not supported by SQLite. in C:\xampp\htdocs\yii\framework\db\schema\sqlite\CSqliteSchema.php:266
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1463): CSqliteSchema->addForeignKey('fk_users_role', 'users', 'role_id', 'roles', 'id', 'CASCADE', 'CASCADE')
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(366): CDbCommand->addForeignKey('fk_users_role', 'users', 'role_id', 'roles', 'id', 'CASCADE', 'CASCADE')
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_050251_create_users_table.php(18): CDbMigration->addForeignKey('fk_users_role', 'users', 'role_id', 'roles', 'id', 'CASCADE', 'CASCADE')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_050251_create_users_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_050251_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
+2025/03/29 07:13:49 [error] [system.db.CDbCommand] Error in preparing SQL: CREATE TABLE 'users' (
+	"id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"fullname" varchar(50) NOT NULL UNIQUE,
+	"password" varchar(255) NOT NULL,
+	"email" varchar(100) NOT NULL UNIQUE,
+	"role_id" integer NOT NULL,
+	"wilayah_id" integer NOT NULL,
+	"created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+2025/03/29 07:13:49 [error] [system.db.CDbCommand] CDbCommand::execute() failed: CDbCommand failed to prepare the SQL statement: SQLSTATE[HY000]: General error: 1 table 'users' already exists. The SQL statement executed was: CREATE TABLE 'users' (
+	"id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"fullname" varchar(50) NOT NULL UNIQUE,
+	"password" varchar(255) NOT NULL,
+	"email" varchar(100) NOT NULL UNIQUE,
+	"role_id" integer NOT NULL,
+	"wilayah_id" integer NOT NULL,
+	"created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+).
+2025/03/29 07:13:49 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: CDbCommand failed to prepare the SQL statement: SQLSTATE[HY000]: General error: 1 table 'users' already exists. The SQL statement executed was: CREATE TABLE 'users' (
+	"id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"fullname" varchar(50) NOT NULL UNIQUE,
+	"password" varchar(255) NOT NULL,
+	"email" varchar(100) NOT NULL UNIQUE,
+	"role_id" integer NOT NULL,
+	"wilayah_id" integer NOT NULL,
+	"created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1352): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(250): CDbCommand->createTable('users', Array, NULL)
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_050251_create_users_table.php(6): CDbMigration->createTable('users', Array)
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_050251_create_users_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_050251_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
+2025/03/29 07:15:18 [error] [system.db.CDbCommand] Error in preparing SQL: CREATE TABLE 'users' (
+	"id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"fullname" varchar(50) NOT NULL UNIQUE,
+	"password" varchar(255) NOT NULL,
+	"email" varchar(100) NOT NULL UNIQUE,
+	"role_id" integer NOT NULL,
+	"wilayah_id" integer NOT NULL,
+	"created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+2025/03/29 07:15:18 [error] [system.db.CDbCommand] CDbCommand::execute() failed: CDbCommand failed to prepare the SQL statement: SQLSTATE[HY000]: General error: 1 table 'users' already exists. The SQL statement executed was: CREATE TABLE 'users' (
+	"id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"fullname" varchar(50) NOT NULL UNIQUE,
+	"password" varchar(255) NOT NULL,
+	"email" varchar(100) NOT NULL UNIQUE,
+	"role_id" integer NOT NULL,
+	"wilayah_id" integer NOT NULL,
+	"created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+).
+2025/03/29 07:15:18 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: CDbCommand failed to prepare the SQL statement: SQLSTATE[HY000]: General error: 1 table 'users' already exists. The SQL statement executed was: CREATE TABLE 'users' (
+	"id" integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	"fullname" varchar(50) NOT NULL UNIQUE,
+	"password" varchar(255) NOT NULL,
+	"email" varchar(100) NOT NULL UNIQUE,
+	"role_id" integer NOT NULL,
+	"wilayah_id" integer NOT NULL,
+	"created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1352): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(250): CDbCommand->createTable('users', Array, NULL)
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_050251_create_users_table.php(6): CDbMigration->createTable('users', Array)
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_050251_create_users_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_050251_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
+2025/03/29 07:16:31 [error] [exception.CDbException] CDbException: Dropping a foreign key constraint is not supported by SQLite. in C:\xampp\htdocs\yii\framework\db\schema\sqlite\CSqliteSchema.php:280
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1475): CSqliteSchema->dropForeignKey('fk_master_wilay...', 'master_wilayah')
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(379): CDbCommand->dropForeignKey('fk_master_wilay...', 'master_wilayah')
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_050130_create_master_wilayah_table.php(24): CDbMigration->dropForeignKey('fk_master_wilay...', 'master_wilayah')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(440): m250329_050130_create_master_wilayah_table->down()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(145): MigrateCommand->migrateDown('m250329_050130_...')
+#5 [internal function]: MigrateCommand->actionDown(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
+2025/03/29 07:17:21 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1049] Unknown database 'testdrive' in C:\xampp\htdocs\yii\framework\db\CDbConnection.php:399
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(347): CDbConnection->open()
+#1 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(325): CDbConnection->setActive(true)
+#2 C:\xampp\htdocs\yii\framework\base\CModule.php(394): CDbConnection->init()
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(472): CModule->getComponent('db')
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(481): MigrateCommand->getDbConnection()
+#5 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(128): MigrateCommand->getMigrationHistory(1)
+#6 [internal function]: MigrateCommand->actionDown(Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#9 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#10 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#11 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#12 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#13 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+---
+2025/03/29 07:17:26 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1049] Unknown database 'testdrive' in C:\xampp\htdocs\yii\framework\db\CDbConnection.php:399
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(347): CDbConnection->open()
+#1 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(325): CDbConnection->setActive(true)
+#2 C:\xampp\htdocs\yii\framework\base\CModule.php(394): CDbConnection->init()
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(472): CModule->getComponent('db')
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(481): MigrateCommand->getDbConnection()
+#5 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(512): MigrateCommand->getMigrationHistory(-1)
+#6 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#7 [internal function]: MigrateCommand->actionUp(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#9 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#10 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#12 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#13 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#14 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+---
+2025/03/29 07:17:42 [error] [exception.CDbException] CDbException: CDbConnection.connectionString cannot be empty. in C:\xampp\htdocs\yii\framework\db\CDbConnection.php:387
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(347): CDbConnection->open()
+#1 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(325): CDbConnection->setActive(true)
+#2 C:\xampp\htdocs\yii\framework\base\CModule.php(394): CDbConnection->init()
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(472): CModule->getComponent('db')
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(481): MigrateCommand->getDbConnection()
+#5 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(512): MigrateCommand->getMigrationHistory(-1)
+#6 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#7 [internal function]: MigrateCommand->actionUp(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#9 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#10 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#12 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#13 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#14 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+---
+2025/03/29 07:18:04 [error] [exception.CException] CException: Property "CDbConnection.db" is not defined. in C:\xampp\htdocs\yii\framework\base\CComponent.php:172
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\YiiBase.php(227): CComponent->__set('db', Array)
+#1 C:\xampp\htdocs\yii\framework\base\CModule.php(393): YiiBase::createComponent(Array)
+#2 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(472): CModule->getComponent('db')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(481): MigrateCommand->getDbConnection()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(512): MigrateCommand->getMigrationHistory(-1)
+#5 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#6 [internal function]: MigrateCommand->actionUp(Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#9 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#10 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#11 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#12 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#13 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+---
+2025/03/29 07:18:32 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1049] Unknown database 'klinik_db' in C:\xampp\htdocs\yii\framework\db\CDbConnection.php:399
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(347): CDbConnection->open()
+#1 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(325): CDbConnection->setActive(true)
+#2 C:\xampp\htdocs\yii\framework\base\CModule.php(394): CDbConnection->init()
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(472): CModule->getComponent('db')
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(481): MigrateCommand->getDbConnection()
+#5 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(512): MigrateCommand->getMigrationHistory(-1)
+#6 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#7 [internal function]: MigrateCommand->actionUp(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#9 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#10 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#12 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#13 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#14 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+---
+2025/03/29 07:19:12 [error] [exception.CDbException] CDbException: CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1049] Unknown database 'klinik_db' in C:\xampp\htdocs\yii\framework\db\CDbConnection.php:399
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(347): CDbConnection->open()
+#1 C:\xampp\htdocs\yii\framework\db\CDbConnection.php(325): CDbConnection->setActive(true)
+#2 C:\xampp\htdocs\yii\framework\base\CModule.php(394): CDbConnection->init()
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(472): CModule->getComponent('db')
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(481): MigrateCommand->getDbConnection()
+#5 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(512): MigrateCommand->getMigrationHistory(-1)
+#6 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(84): MigrateCommand->getNewMigrations()
+#7 [internal function]: MigrateCommand->actionUp(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#9 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#10 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#12 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#13 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#14 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#15 {main}
+---
+2025/03/29 07:19:42 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'klinik_db.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
+2025/03/29 07:19:44 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42000]: Syntax error or access violation: 1072 Key column 'role_id' doesn't exist in table. The SQL statement executed was: ALTER TABLE `doctors` ADD CONSTRAINT `fk_doctors_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE.
+2025/03/29 07:19:44 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1072 Key column 'role_id' doesn't exist in table. The SQL statement executed was: ALTER TABLE `doctors` ADD CONSTRAINT `fk_doctors_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1463): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(366): CDbCommand->addForeignKey('fk_doctors_role', 'doctors', 'role_id', 'roles', 'id', 'CASCADE', 'CASCADE')
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_054909_create_doctors_table.php(24): CDbMigration->addForeignKey('fk_doctors_role', 'doctors', 'role_id', 'roles', 'id', 'CASCADE', 'CASCADE')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_054909_create_doctors_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_054909_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
+2025/03/29 07:20:48 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'doctors' already exists. The SQL statement executed was: CREATE TABLE `doctors` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`user_id` int(11) NOT NULL,
+	`specialty` varchar(100) NOT NULL,
+	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+).
+2025/03/29 07:20:48 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'doctors' already exists. The SQL statement executed was: CREATE TABLE `doctors` (
+	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`user_id` int(11) NOT NULL,
+	`specialty` varchar(100) NOT NULL,
+	`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1352): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(250): CDbCommand->createTable('doctors', Array, NULL)
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_054909_create_doctors_table.php(15): CDbMigration->createTable('doctors', Array)
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_054909_create_doctors_table->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_054909_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
