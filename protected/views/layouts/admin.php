@@ -26,8 +26,13 @@
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
-                        <?php echo CHtml::link('Dashboard', array('/admin/index'), array(
+                        <?php echo CHtml::link('Home', array('/admin/index'), array(
                             'class' => ($currentRoute == 'admin/index') ? 'text-sky-500 font-bold' : 'text-white hover:text-gray-300'
+                        )); ?>
+                    </li>
+                    <li>
+                        <?php echo CHtml::link('Laporan', array('/admin/dashboard'), array(
+                            'class' => ($currentRoute == 'admin/dashboard') ? 'text-sky-500 font-bold' : 'text-white hover:text-gray-300'
                         )); ?>
                     </li>
                     <li>

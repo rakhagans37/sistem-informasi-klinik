@@ -27,7 +27,7 @@ $data = $dataProvider->getData();
                     ? Yii::app()->baseUrl . '/assets/uploads/' . $user->photo
                     : 'https://via.placeholder.com/150';
                 ?>
-                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="<?php echo $photo; ?>" alt="<?php echo CHtml::encode($user->fullname); ?>" />
+                <img class="w-24 h-24 mb-3 rounded-full shadow-lg object-cover" src="<?php echo $photo; ?>" alt="<?php echo CHtml::encode($user->fullname); ?>" />
                 <h5 class="mb-1 text-xl font-medium text-gray-900"><?php echo CHtml::encode($user->fullname); ?></h5>
                 <span class="text-sm text-gray-500"><?php echo CHtml::encode($user->email); ?></span>
                 <div class="flex mt-4 md:mt-6 gap-2">
