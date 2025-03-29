@@ -16,6 +16,7 @@ class m250329_050419_create_doctors_table extends CDbMigration
 			'id'         => 'pk',
 			'user_id'    => 'integer NOT NULL',
 			'specialty'  => 'varchar(100) NOT NULL',
+			'wilayah_id' => 'integer NOT NULL',
 			'created_at' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 			'updated_at' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 		));
@@ -26,6 +27,16 @@ class m250329_050419_create_doctors_table extends CDbMigration
 			'doctors',
 			'user_id',
 			'users',
+			'id',
+			'CASCADE',
+			'CASCADE'
+		);
+
+		$this->addForeignKey(
+			'fk_doctors_wilayah_id',
+			'doctors',
+			'wilayah_id',
+			'master_wilayah',
 			'id',
 			'CASCADE',
 			'CASCADE'
