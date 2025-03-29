@@ -21,6 +21,29 @@ class UserIdentity extends CUserIdentity
 			// Simpan data tambahan ke state, misalnya role dan wilayah
 			Yii::app()->user->setState('role_id', $user->role_id);
 			Yii::app()->user->setState('is_active', $user->is_active);
+
+			// Jika bukan admin maka simpan wilayah_id
+			if ($user->role_id != 1) {
+				// Cari wilayah_id berdasarkan role_id
+				if ($user->role_id == 2) {
+					$doctor = Doctors::model()->find('user_id=:user_id', array(':user_id' => $this->_id));
+					if ($doctor !== null) {
+						Yii::app()->user->setState('wilayah_id', $doctor->wilayah_id);
+					}
+				} elseif ($user->role_id == 3) {
+					$receptionist = Recepsionists::model()->find('user_id=:user_id', array(':user_id' => $this->_id));
+					if ($receptionist !== null) {
+						Yii::app()->user->setState('wilayah_id', $receptionist->wilayah_id);
+					}
+				} elseif ($user->role_id == 4) {
+					$cashier = Cashiers::model()->find('user_id=:user_id', array(':user_id' => $this->_id));
+					if ($cashier !== null) {
+						Yii::app()->user->setState('wilayah_id', $cashier->wilayah_id);
+					}
+				}
+			} else {
+				Yii::app()->user->setState('wilayah_id', 0);
+			}
 		}
 		return !$this->errorCode;
 	}
