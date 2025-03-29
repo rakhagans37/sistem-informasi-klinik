@@ -32,6 +32,7 @@ class Users extends CActiveRecord
             array('password', 'length', 'max' => 255),
             array('email', 'length', 'max' => 100),
             array('email', 'unique'),
+            array('is_active', 'boolean'),
             array('role_id', 'numerical', 'integerOnly' => true),
             // Field photo dianggap aman (tidak wajib)
             array('photo', 'safe'),
@@ -67,6 +68,7 @@ class Users extends CActiveRecord
             'photo'      => 'Photo',
             'created_at' => 'Dibuat',
             'updated_at' => 'Diupdate',
+            'is_active'  => 'Aktif',
         );
     }
 }

@@ -84,6 +84,12 @@ class SiteController extends Controller
 			if ($model->validate() && $model->login()) {
 				// Ambil role dari state
 				$roleId = Yii::app()->user->getState('role_id');
+				$is_active = Yii::app()->user->getState('is_active');
+
+				if(!$is_active) {
+					Yii::app()->user->setFlash('error', 'Akun Anda tidak aktif. Silakan hubungi administrator.');
+					$this->redirect(array('unauthorized'));
+				}
 
 				// Redirect berdasarkan role
 				switch ($roleId) {
@@ -119,6 +125,11 @@ class SiteController extends Controller
 		$this->redirect(Yii::app()->homeUrl);
 	}
 
+	public function actionUnauthorized()
+	{
+		$this->render('unauthorized');
+	}
+	
 	public function actionRegisterDoctor()
 	{
 		$model = new RegisterDoctorForm;

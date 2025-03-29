@@ -27,6 +27,7 @@ class AdminController extends Controller
                 'allow',
                 // Semua aksi di controller ini hanya boleh diakses oleh admin (misalnya role_id == 1)
                 'expression' => 'Yii::app()->user->getState("role_id") == 1',
+                'expression' => 'Yii::app()->user->getState("is_active") == 1',
             ),
             array('deny', 'users' => array('*')),
         );

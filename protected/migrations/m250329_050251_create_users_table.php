@@ -12,6 +12,7 @@ class m250329_050251_create_users_table extends CDbMigration
 			'photo'    => 'varchar(255) DEFAULT NULL',
 			'created_at' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 			'updated_at' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+			'is_active' => 'boolean NOT NULL DEFAULT 0',
 		));
 
 		// Add foreign key constraints
