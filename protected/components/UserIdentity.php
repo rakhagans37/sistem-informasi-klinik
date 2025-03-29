@@ -6,22 +6,20 @@ class UserIdentity extends CUserIdentity
 
 	public function authenticate()
 	{
-		// Cari user berdasarkan username atau email (sesuaikan dengan kolom pada tabel Users)
-		$user = Users::model()->find('fullname=:identifier OR email=:identifier', array(':identifier' => $this->username));
+		// Cari user berdasarkan email
+		$user = Users::model()->find('email=:email', array(':email' => $this->username));
 
 		if ($user === null)
 			$this->errorCode = self::ERROR_USERNAME_INVALID;
-		// Misalnya, kita menggunakan CPasswordHelper untuk memverifikasi password yang di-hash
-		else if (!CPasswordHelper::verifyPassword($this->password, $user->password))
+		else if ($this->password != $user->password) {
 			$this->errorCode = self::ERROR_PASSWORD_INVALID;
-		else {
+		} else {
 			$this->_id = $user->id;
-			// Set username menjadi fullname atau yang diinginkan
-			$this->username = $user->fullname;
+			// Set identifier sebagai email
+			$this->username = $user->email;
 			$this->errorCode = self::ERROR_NONE;
-			// Simpan data tambahan ke dalam state, misalnya role dan wilayah
+			// Simpan data tambahan ke state, misalnya role dan wilayah
 			Yii::app()->user->setState('role_id', $user->role_id);
-			Yii::app()->user->setState('wilayah_id', $user->wilayah_id);
 		}
 		return !$this->errorCode;
 	}

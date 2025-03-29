@@ -17,9 +17,9 @@ $this->pageTitle = Yii::app()->name . ' - Login';
 	<p class="note">Kolom bertanda <span class="required">*</span> wajib diisi.</p>
 
 	<div class="row">
-		<?php echo $form->labelEx($model, 'username'); ?>
-		<?php echo $form->textField($model, 'username'); ?>
-		<?php echo $form->error($model, 'username'); ?>
+		<?php echo $form->labelEx($model, 'email'); ?>
+		<?php echo $form->textField($model, 'email'); ?>
+		<?php echo $form->error($model, 'email'); ?>
 	</div>
 
 	<div class="row">

@@ -69,9 +69,6 @@ class SiteController extends Controller
 		$this->render('contact', array('model' => $model));
 	}
 
-	/**
-	 * Displays the login page
-	 */
 	public function actionLogin()
 	{
 		$model = new LoginForm;
@@ -82,16 +79,35 @@ class SiteController extends Controller
 			Yii::app()->end();
 		}
 
-		// Jika ada input dari form login
 		if (isset($_POST['LoginForm'])) {
 			$model->attributes = $_POST['LoginForm'];
-			if ($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
-		}
+			if ($model->validate() && $model->login()) {
+				// Ambil role dari state
+				$roleId = Yii::app()->user->getState('role_id');
 
-		// Tampilkan form login
+				// Redirect berdasarkan role
+				switch ($roleId) {
+					case 1:
+						$this->redirect(array('/admin/index'));
+						break;
+					case 2:
+						$this->redirect(array('/cashier/index'));
+						break;
+					case 3:
+						$this->redirect(array('/resepcionist/index'));
+						break;
+					case 4:
+						$this->redirect(array('/doctor/index'));
+						break;
+					default:
+						$this->redirect(Yii::app()->user->returnUrl);
+						break;
+				}
+			}
+		}
 		$this->render('login', array('model' => $model));
 	}
+
 
 
 	/**
