@@ -26,14 +26,14 @@ class Users extends CActiveRecord
     public function rules()
     {
         return array(
-            array('fullname, password, email, role_id, wilayah_id', 'required'),
+            array('fullname, password, email, role_id, ', 'required'),
             array('fullname', 'length', 'max' => 50),
             array('password', 'length', 'max' => 255),
             array('email', 'length', 'max' => 100),
             array('email', 'unique'),
-            array('role_id, wilayah_id', 'numerical', 'integerOnly' => true),
+            array('role_id, ', 'numerical', 'integerOnly' => true),
             // Safe attributes untuk search atau update
-            array('id, fullname, email, role_id, wilayah_id, created_at, updated_at', 'safe', 'on' => 'search'),
+            array('id, fullname, email, role_id, , created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
   
@@ -45,8 +45,6 @@ class Users extends CActiveRecord
         return array(
             // Relasi ke model Roles melalui kolom role_id
             'role' => array(self::BELONGS_TO, 'Roles', 'role_id'),
-            // Relasi ke model MasterWilayah melalui kolom wilayah_id
-            'wilayah' => array(self::BELONGS_TO, 'MasterWilayah', 'wilayah_id'),
             // Relasi ke model Doctors jika ada
             'doctor' => array(self::HAS_ONE, 'Doctors', 'user_id'),
         );
@@ -63,7 +61,6 @@ class Users extends CActiveRecord
             'password'   => 'Password',
             'email'      => 'Email',
             'role_id'    => 'Role',
-            'wilayah_id' => 'Wilayah',
             'created_at' => 'Dibuat',
             'updated_at' => 'Diupdate',
         );

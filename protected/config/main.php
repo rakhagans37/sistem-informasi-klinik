@@ -15,6 +15,14 @@ return array(
 
     // Application components
     'components' => array(
+        'db' => array(
+            'connectionString' => 'mysql:host=localhost;dbname=klinik_db',
+            'emulatePrepare' => true,
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ),
+
         // Konfigurasi RBAC menggunakan CDbAuthManager
         'authManager' => array(
             'class' => 'CDbAuthManager', // Menggunakan database untuk menyimpan data RBAC
