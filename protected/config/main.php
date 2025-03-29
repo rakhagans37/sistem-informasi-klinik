@@ -15,16 +15,14 @@ return array(
 
     // Application components
     'components' => array(
-        // Konfigurasi database menggunakan PostgreSQL
         'db' => array(
-            'connectionString' => 'pgsql:host=localhost;port=5432;dbname=sistem_informasi_klinik',
+            'connectionString' => 'mysql:host=localhost;dbname=klinik_db',
+            'emulatePrepare' => true,
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
-            // Opsional: caching skema untuk meningkatkan performa
-            'schemaCachingDuration' => 3600,
         ),
-        
+
         // Konfigurasi RBAC menggunakan CDbAuthManager
         'authManager' => array(
             'class' => 'CDbAuthManager', // Menggunakan database untuk menyimpan data RBAC
@@ -34,20 +32,20 @@ return array(
             // 'assignmentTable' => 'auth_assignment',
             // 'itemChildTable' => 'auth_item_child',
         ),
-        
+
         // Komponen user untuk menangani login
         'user' => array(
             // Enable cookie-based authentication
             'allowAutoLogin' => true,
             'loginUrl' => array('site/login'),
         ),
-        
+
         // Error handler
         'errorHandler' => array(
             // Menunjuk ke action error di SiteController
             'errorAction' => 'site/error',
         ),
-        
+
         // Konfigurasi log
         'log' => array(
             'class' => 'CLogRouter',
