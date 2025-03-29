@@ -118,4 +118,110 @@ class SiteController extends Controller
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
+
+	public function actionRegisterDoctor()
+	{
+		$model = new RegisterDoctorForm;
+		if (isset($_POST['RegisterDoctorForm'])) {
+			$model->attributes = $_POST['RegisterDoctorForm'];
+			// Ambil file yang diupload
+			$model->photo = CUploadedFile::getInstance($model, 'photo');
+
+			if ($model->validate()) {
+				$user = new Users;
+				$user->fullname   = $model->fullname;
+				$user->email      = $model->email;
+				$user->password   = CPasswordHelper::hashPassword($model->password);
+				$user->role_id    = 2;  // Role Dokter
+
+				// Tangani file upload jika ada
+				if ($model->photo !== null) {
+					// Misal simpan di folder "uploads" di webroot
+					$filename = uniqid() . '.' . $model->photo->extensionName;
+					$uploadPath = Yii::getPathOfAlias('webroot') . '/assets/uploads/' . $filename;
+					if ($model->photo->saveAs($uploadPath)) {
+						$user->photo = $filename;
+					}
+				}
+
+				if ($user->save()) {
+					// Setelah berhasil simpan user, buat record di table doctors
+					$doctor = new Doctors;
+					$doctor->user_id   = $user->id;
+					$doctor->specialty = $model->specialty;
+					$doctor->wilayah_id = $model->wilayah_id;
+					if ($doctor->save()) {
+						Yii::app()->user->setFlash('success', 'Registrasi Dokter berhasil. Silakan login.');
+						$this->redirect(array('site/login'));
+					} else {
+						Yii::app()->user->setFlash('error', 'Gagal menyimpan data dokter.');
+					}
+				} else {
+					Yii::app()->user->setFlash('error', 'Gagal menyimpan data user.');
+				}
+			}
+		}
+		$this->render('registerDoctor', array('model' => $model));
+	}
+
+	public function actionRegister()
+	{
+		$model = new RegisterStaffForm;
+
+		if (isset($_POST['RegisterStaffForm'])) {
+			$model->attributes = $_POST['RegisterStaffForm'];
+			// Ambil file yang diupload
+			$model->photo = CUploadedFile::getInstance($model, 'photo');
+
+			if ($model->validate()) {
+				$user = new Users;
+				$user->fullname   = $model->fullname;
+				$user->email      = $model->email;
+				$user->password   = CPasswordHelper::hashPassword($model->password);
+
+				// Set role_id berdasarkan pilihan staff_role
+				if ($model->staff_role === 'receptionist') {
+					$user->role_id = 3;
+				} else {
+					$user->role_id = 4;
+				}
+
+				// Tangani file upload (wajib diupload karena aturan validate)
+				if ($model->photo !== null) {
+					$filename = uniqid() . '.' . $model->photo->extensionName;
+					$uploadPath = Yii::getPathOfAlias('webroot') . '/assets/uploads/' . $filename;
+					if ($model->photo->saveAs($uploadPath)) {
+						$user->photo = $filename;
+					} else {
+						Yii::app()->user->setFlash('error', 'Gagal mengupload foto.');
+						$this->render('register', array('model' => $model));
+						Yii::app()->end();
+					}
+				}
+
+				// Simpan user satu kali
+				if ($user->save()) {
+					// Berdasarkan role, simpan record tambahan di tabel terkait
+					if ($model->staff_role === 'receptionist') {
+						$receptionist = new Recepsionists;
+						$receptionist->user_id    = $user->id;
+						$receptionist->wilayah_id = $model->wilayah_id;
+						$receptionist->save();
+					} else {
+						$cashier = new Cashiers;
+						$cashier->user_id    = $user->id;
+						$cashier->wilayah_id = $model->wilayah_id;
+						$cashier->save();
+					}
+
+					Yii::app()->user->setFlash('success', 'Registrasi berhasil. Silakan login.');
+					$this->redirect(array('site/login'));
+				} else {
+					Yii::app()->user->setFlash('error', 'Gagal menyimpan data user.');
+				}
+			}
+		}
+
+		$this->render('register', array('model' => $model));
+	}
 }

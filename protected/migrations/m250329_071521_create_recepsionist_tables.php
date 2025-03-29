@@ -6,6 +6,7 @@ class m250329_071521_create_recepsionist_tables extends CDbMigration
 	{
 		$this->createTable('recepsionists', array(
 			'id'         => 'pk',
+			'user_id'     => 'integer NOT NULL',
 			'wilayah_id' => 'integer NOT NULL',
 			'created_at' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 			'updated_at' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
@@ -17,6 +18,16 @@ class m250329_071521_create_recepsionist_tables extends CDbMigration
 			'recepsionists',
 			'wilayah_id',
 			'master_wilayah',
+			'id',
+			'CASCADE'
+		);
+
+		// Foreign key to users
+		$this->addForeignKey(
+			'fk_recepsionists_user',
+			'recepsionists',
+			'user_id',
+			'users',
 			'id',
 			'CASCADE'
 		);

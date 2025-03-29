@@ -9,6 +9,7 @@ class m250329_050251_create_users_table extends CDbMigration
 			'password'   => 'varchar(255) NOT NULL',
 			'email'      => 'varchar(100) NOT NULL UNIQUE',
 			'role_id'    => 'integer NOT NULL',
+			'photo'    => 'varchar(255) DEFAULT NULL',
 			'created_at' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 			'updated_at' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 		));
