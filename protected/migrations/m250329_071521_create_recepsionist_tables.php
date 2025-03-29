@@ -13,7 +13,7 @@ class m250329_071521_create_recepsionist_tables extends CDbMigration
 		
 		// Foreign key to master_wilayah
 		$this->addForeignKey(
-			'fk_cashiers_wilayah',
+			'fk_recepsionists_wilayah',
 			'recepsionists',
 			'wilayah_id',
 			'master_wilayah',

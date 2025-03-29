@@ -458,3 +458,21 @@ Stack trace:
 REQUEST_URI=/yii/index.php?r=site/login
 HTTP_REFERER=http://localhost:8080/yii/index.php?r=site/login
 ---
+2025/03/29 08:20:15 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[HY000]: General error: 1005 Can't create table `klinik_db`.`recepsionists` (errno: 121 "Duplicate key on write or update"). The SQL statement executed was: ALTER TABLE `recepsionists` ADD CONSTRAINT `fk_cashiers_wilayah` FOREIGN KEY (`wilayah_id`) REFERENCES `master_wilayah` (`id`) ON DELETE CASCADE.
+2025/03/29 08:20:15 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[HY000]: General error: 1005 Can't create table `klinik_db`.`recepsionists` (errno: 121 "Duplicate key on write or update"). The SQL statement executed was: ALTER TABLE `recepsionists` ADD CONSTRAINT `fk_cashiers_wilayah` FOREIGN KEY (`wilayah_id`) REFERENCES `master_wilayah` (`id`) ON DELETE CASCADE in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:358
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(1463): CDbCommand->execute()
+#1 C:\xampp\htdocs\yii\framework\db\CDbMigration.php(366): CDbCommand->addForeignKey('fk_cashiers_wil...', 'recepsionists', 'wilayah_id', 'master_wilayah', 'id', 'CASCADE', NULL)
+#2 C:\xampp\htdocs\yii\protected\migrations\m250329_071521_create_recepsionist_tables.php(15): CDbMigration->addForeignKey('fk_cashiers_wil...', 'recepsionists', 'wilayah_id', 'master_wilayah', 'id', 'CASCADE')
+#3 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(415): m250329_071521_create_recepsionist_tables->up()
+#4 C:\xampp\htdocs\yii\framework\cli\commands\MigrateCommand.php(109): MigrateCommand->migrateUp('m250329_071521_...')
+#5 [internal function]: MigrateCommand->actionUp(Array)
+#6 C:\xampp\htdocs\yii\framework\console\CConsoleCommand.php(177): ReflectionMethod->invokeArgs(Object(MigrateCommand), Array)
+#7 C:\xampp\htdocs\yii\framework\console\CConsoleCommandRunner.php(71): CConsoleCommand->run(Array)
+#8 C:\xampp\htdocs\yii\framework\console\CConsoleApplication.php(92): CConsoleCommandRunner->run(Array)
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CConsoleApplication->processRequest()
+#10 C:\xampp\htdocs\yii\framework\yiic.php(33): CApplication->run()
+#11 C:\xampp\htdocs\yii\protected\yiic.php(7): require_once('C:\\xampp\\htdocs...')
+#12 C:\xampp\htdocs\yii\protected\yiic(4): require_once('C:\\xampp\\htdocs...')
+#13 {main}
+---
