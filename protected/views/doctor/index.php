@@ -1,9 +1,11 @@
 <?php
-/* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name;
+/* @var $this DoctorController */
+/* @var $dataProvider CActiveDataProvider */
 ?>
 
-<h1>Selamat datang di <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
-<p>Ini adalah halaman dokter. Anda dapat mengelola data di sini.</p>
-<p>Silakan pilih menu di atas untuk melanjutkan.</p>
+<h1 class="text-3xl font-bold mb-6">Daftar Pasien Pending</h1>
+
+<?php $this->widget('zii.widgets.CListView', array(
+    'dataProvider'=>$dataProvider,
+    'itemView'=>'_item',  // buat file partial _item.php
+)); ?>

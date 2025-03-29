@@ -17,7 +17,7 @@ class CashierController extends Controller
             array(
                 'allow',
                 'actions' => array('index', 'dashboard'), // daftar aksi yang diizinkan
-                'expression' => 'Yii::app()->user->getState("role_id") == 2',
+                'expression' => 'Yii::app()->user->getState("role_id") == 4',
                 'expression' => 'Yii::app()->user->getState("is_active") == 1',
             ),
             array('deny', 'users' => array('*')),

@@ -22,27 +22,26 @@ class UserIdentity extends CUserIdentity
 			Yii::app()->user->setState('role_id', $user->role_id);
 			Yii::app()->user->setState('is_active', $user->is_active);
 
-			// Jika bukan admin maka simpan wilayah_id
+			/// Jika bukan admin maka simpan wilayah_id
 			if ($user->role_id != 1) {
 				// Cari wilayah_id berdasarkan role_id
 				if ($user->role_id == 2) {
-					$doctor = Doctors::model()->find('user_id=:user_id', array(':user_id' => $this->_id));
+					$doctor = Doctors::model()->find('user_id=:user_id', array(':user_id' => $user->id));
 					if ($doctor !== null) {
 						Yii::app()->user->setState('wilayah_id', $doctor->wilayah_id);
+						Yii::app()->user->setState('doctor_id', $doctor->id);
 					}
 				} elseif ($user->role_id == 3) {
-					$receptionist = Recepsionists::model()->find('user_id=:user_id', array(':user_id' => $this->_id));
+					$receptionist = Recepsionists::model()->find('user_id=:user_id', array(':user_id' => $user->id));
 					if ($receptionist !== null) {
 						Yii::app()->user->setState('wilayah_id', $receptionist->wilayah_id);
 					}
 				} elseif ($user->role_id == 4) {
-					$cashier = Cashiers::model()->find('user_id=:user_id', array(':user_id' => $this->_id));
+					$cashier = Cashiers::model()->find('user_id=:user_id', array(':user_id' => $user->id));
 					if ($cashier !== null) {
 						Yii::app()->user->setState('wilayah_id', $cashier->wilayah_id);
 					}
 				}
-			} else {
-				Yii::app()->user->setState('wilayah_id', 0);
 			}
 		}
 		return !$this->errorCode;

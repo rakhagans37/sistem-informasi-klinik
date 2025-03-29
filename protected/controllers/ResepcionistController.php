@@ -98,7 +98,7 @@ class ResepcionistController extends Controller
 
             if ($appointment->save()) {
                 Yii::app()->user->setFlash('success', 'Appointment berhasil dibuat.');
-                $this->redirect(array('view', 'id' => $appointment->id));
+                $this->redirect(array('index', 'id' => $appointment->id));
             } else {
                 Yii::app()->user->setFlash('error', 'Gagal membuat appointment: ' . implode(', ', array_map(function ($e) {
                     return implode('; ', $e);

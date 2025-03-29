@@ -97,13 +97,13 @@ class SiteController extends Controller
 						$this->redirect(array('/admin/index'));
 						break;
 					case 2:
-						$this->redirect(array('/cashier/index'));
+						$this->redirect(array('/doctor/index'));
 						break;
 					case 3:
 						$this->redirect(array('/resepcionist/index'));
 						break;
 					case 4:
-						$this->redirect(array('/doctor/index'));
+						$this->redirect(array('/cashier/index'));
 						break;
 					default:
 						$this->redirect(Yii::app()->user->returnUrl);
