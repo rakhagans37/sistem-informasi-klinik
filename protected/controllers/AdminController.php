@@ -380,7 +380,7 @@ class AdminController extends Controller
         $omzetValues = array();
         foreach ($omzetData as $row) {
             $omzetLabels[] = $row['minggu'];
-            $omzetValues[] = (float)$row['total'];
+            $omzetValues = (float)$row['total'];
         }
 
         // Query untuk penjualan obat per minggu

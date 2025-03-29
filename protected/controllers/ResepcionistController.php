@@ -28,6 +28,7 @@ class ResepcionistController extends Controller
     {
         // Ambil wilayah_id dari state pengguna yang login
         $wilayah_id = Yii::app()->user->getState('wilayah_id');
+        $wilayah = MasterWilayah::model()->findByPk($wilayah_id);
 
         // Buat kriteria untuk mengambil appointment berdasarkan wilayah dari doctor
         $criteria = new CDbCriteria;
@@ -45,6 +46,7 @@ class ResepcionistController extends Controller
 
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+            'wilayah' => $wilayah,
         ));
     }
 

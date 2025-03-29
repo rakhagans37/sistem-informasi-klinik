@@ -4,7 +4,8 @@
 ?>
 
 <div class="container mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Administrasi Klinik</h1>
+    <h1 class="text-3xl font-bold mb-2">Administrasi Klinik</h1>
+    <p class="mb-4">Lokasi: <?php echo $wilayah->nama ?></p>
 
     <?php $this->widget('zii.widgets.grid.CGridView', array(
         'id' => 'appointments-grid',

@@ -11,7 +11,7 @@ $this->pageTitle = "Dashboard Admin";
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div class="bg-white shadow rounded-lg p-4">
             <p class="text-sm text-gray-500">Total Omzet Bulan Ini</p>
-            <p class="text-2xl font-bold">Rp <?php echo $omzetValues; ?></p>
+            <p class="text-2xl font-bold"><?php echo "Rp. " . number_format($omzetValues, 2, ',', '.'); ?></p>
         </div>
         <div class="bg-white shadow rounded-lg p-4">
             <p class="text-sm text-gray-500">Jumlah Transaksi</p>

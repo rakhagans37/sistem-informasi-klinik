@@ -87,7 +87,11 @@
         <?php echo CHtml::dropDownList(
             'Appointments[doctor_id]',
             '',
-            CHtml::listData(Doctors::model()->findAll(), 'id', 'user.fullname'),
+            // Doctor where wilayah_id is same with state wilayah_id
+            CHtml::listData(Doctors::model()->findAll(array(
+                'condition' => 'wilayah_id = :wilayah_id',
+                'params' => array(':wilayah_id' => Yii::app()->user->getState('wilayah_id'))
+            )), 'id', 'nama'),
             array(
                 'class' => 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline',
                 'prompt' => 'Pilih dokter'
