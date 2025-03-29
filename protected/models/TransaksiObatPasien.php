@@ -45,7 +45,7 @@ class TransaksiObatPasien extends CActiveRecord
             // Relasi ke model Pasien
             'pasien' => array(self::BELONGS_TO, 'Pasien', 'pasien_id'),
             // Relasi ke model Users untuk dokter
-            'dokter' => array(self::BELONGS_TO, 'Users', 'dokter_id'),
+            'dokter' => array(self::BELONGS_TO, 'Doctors', 'dokter_id'),
             // Relasi ke model MasterObat
             'obat' => array(self::BELONGS_TO, 'MasterObat', 'obat_id'),
         );

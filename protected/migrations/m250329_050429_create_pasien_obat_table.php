@@ -39,7 +39,7 @@ class m250329_050429_create_pasien_obat_table extends CDbMigration
 			'fk_transaksi_obat_pasien_dokter',
 			'transaksi_obat_pasien',
 			'dokter_id',
-			'users',
+			'doctors',
 			'id',
 			'SET NULL',
 			'CASCADE'
