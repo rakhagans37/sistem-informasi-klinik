@@ -6225,3 +6225,1137 @@ Stack trace:
 REQUEST_URI=/yii/index.php?r=doctor/giveMedication&id=10
 HTTP_REFERER=http://localhost:8080/yii/index.php?r=doctor/detail&id=10
 ---
+2025/03/29 17:15:35 [error] [exception.CHttpException.403] CHttpException: Doctor ID tidak terdeteksi. Pastikan Anda login sebagai dokter. in C:\xampp\htdocs\yii\protected\controllers\DoctorController.php:31
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): DoctorController->actionIndex()
+#1 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#10 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('doctor/index')
+#11 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#12 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/yii/index.php?r=doctor/index
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=site/login
+---
+2025/03/29 17:28:06 [error] [system.db.CDbCommand] CDbCommand::fetchColumn() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'o.biaya' in 'field list'. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE 1=1  GROUP BY p.id, p.nomor_registrasi, p.nama
+              HAVING total_outstanding > 0) AS sub.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (60)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:28:06 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'o.biaya' in 'field list'. The SQL statement executed was: SELECT COUNT(*) FROM (SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE 1=1  GROUP BY p.id, p.nomor_registrasi, p.nama
+              HAVING total_outstanding > 0) AS sub in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(433): CDbCommand->queryInternal('fetchColumn', 0, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(60): CDbCommand->queryScalar(Array)
+#2 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): CashierController->actionIndex()
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#12 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/index')
+#13 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/yii/index.php?r=cashier/index
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=site/login
+---
+2025/03/29 17:34:51 [error] [exception.CException] CException: Alias "zii.widgets.CGridView" is invalid. Make sure it points to an existing PHP file and the file is readable. in C:\xampp\htdocs\yii\framework\YiiBase.php:330
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CWidgetFactory.php(146): YiiBase::import('zii.widgets.CGr...', true)
+#1 C:\xampp\htdocs\yii\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(CashierController), 'zii.widgets.CGr...', Array)
+#2 C:\xampp\htdocs\yii\framework\web\CBaseController.php(181): CBaseController->createWidget('zii.widgets.CGr...', Array)
+#3 C:\xampp\htdocs\yii\protected\views\cashier\index.php(19): CBaseController->widget('zii.widgets.CGr...', Array)
+#4 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\xampp\\htdocs...', Array, true)
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(872): CBaseController->renderFile('C:\\xampp\\htdocs...', Array, true)
+#7 C:\xampp\htdocs\yii\framework\web\CController.php(785): CController->renderPartial('index', Array, true)
+#8 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(68): CController->render('index', Array)
+#9 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(49): CashierController->actionIndex()
+#10 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#14 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#15 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#16 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('index')
+#19 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/index')
+#20 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#21 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/yii/index.php?r=cashier/index
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:36:38 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "view". in C:\xampp\htdocs\yii\framework\web\CController.php:486
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('view')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:37:08 [error] [exception.CHttpException.404] CHttpException: The system is unable to find the requested action "view". in C:\xampp\htdocs\yii\framework\web\CController.php:486
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CController.php(270): CController->missingAction('view')
+#1 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#2 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#3 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:38:20 [error] [exception.CHttpException.403] CHttpException: You are not authorized to perform this action. in C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php:183
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#3 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#8 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#9 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:38:30 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (91)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:38:30 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(91): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:38:37 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (91)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:38:37 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(91): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:39:35 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (91)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:39:35 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(91): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:39:39 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (91)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:39:39 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(91): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:39:42 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (91)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:39:42 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(91): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:40:04 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (91)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:40:04 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(91): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:40:16 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (91)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:40:16 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+            GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+                p.id, 
+                p.nomor_registrasi, 
+                p.nama,
+                COALESCE(SUM(t.biaya),0) AS total_tindakan,
+                COALESCE(SUM(o.biaya),0) AS total_obat,
+                (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+            FROM pasien p
+            LEFT JOIN transaksi_tindakan t 
+                ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+            LEFT JOIN transaksi_obat_pasien o 
+                ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+            WHERE p.id = :id
+            GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(91): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:41:19 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:41:19 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:41:20 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:41:20 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:41:20 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:41:20 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:41:27 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:41:27 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:41:27 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:41:27 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+      ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+      ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = :id
+    GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:41:49 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+        GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+            p.id, 
+            p.nomor_registrasi, 
+            p.nama,
+            COALESCE(SUM(t.biaya),0) AS total_tindakan,
+            COALESCE(SUM(o.biaya),0) AS total_obat,
+            (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+        FROM pasien p
+        LEFT JOIN transaksi_tindakan t
+          ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+        LEFT JOIN transaksi_obat_pasien o
+          ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+        WHERE p.id = ?
+        GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:41:49 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+        GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+            p.id, 
+            p.nomor_registrasi, 
+            p.nama,
+            COALESCE(SUM(t.biaya),0) AS total_tindakan,
+            COALESCE(SUM(o.biaya),0) AS total_obat,
+            (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+        FROM pasien p
+        LEFT JOIN transaksi_tindakan t
+          ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+        LEFT JOIN transaksi_obat_pasien o
+          ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+        WHERE p.id = ?
+        GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:41:50 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+        GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+            p.id, 
+            p.nomor_registrasi, 
+            p.nama,
+            COALESCE(SUM(t.biaya),0) AS total_tindakan,
+            COALESCE(SUM(o.biaya),0) AS total_obat,
+            (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+        FROM pasien p
+        LEFT JOIN transaksi_tindakan t
+          ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+        LEFT JOIN transaksi_obat_pasien o
+          ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+        WHERE p.id = ?
+        GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:41:50 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+        GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+            p.id, 
+            p.nomor_registrasi, 
+            p.nama,
+            COALESCE(SUM(t.biaya),0) AS total_tindakan,
+            COALESCE(SUM(o.biaya),0) AS total_obat,
+            (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+        FROM pasien p
+        LEFT JOIN transaksi_tindakan t
+          ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+        LEFT JOIN transaksi_obat_pasien o
+          ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+        WHERE p.id = ?
+        GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:41:50 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+        GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+            p.id, 
+            p.nomor_registrasi, 
+            p.nama,
+            COALESCE(SUM(t.biaya),0) AS total_tindakan,
+            COALESCE(SUM(o.biaya),0) AS total_obat,
+            (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+        FROM pasien p
+        LEFT JOIN transaksi_tindakan t
+          ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+        LEFT JOIN transaksi_obat_pasien o
+          ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+        WHERE p.id = ?
+        GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:41:50 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+        GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+            p.id, 
+            p.nomor_registrasi, 
+            p.nama,
+            COALESCE(SUM(t.biaya),0) AS total_tindakan,
+            COALESCE(SUM(o.biaya),0) AS total_obat,
+            (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+        FROM pasien p
+        LEFT JOIN transaksi_tindakan t
+          ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+        LEFT JOIN transaksi_obat_pasien o
+          ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+        WHERE p.id = ?
+        GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:44:16 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+        ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+        ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = ?
+    GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:44:16 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+        ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+        ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = ?
+    GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:44:17 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+        ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+        ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = ?
+    GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:44:17 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+        ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+        ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = ?
+    GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:45:03 [error] [exception.TypeError] TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\yii\protected\views\cashier\view.php:10
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\web\CBaseController.php(126): require()
+#1 C:\xampp\htdocs\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\\xampp\\htdocs...', Array, true)
+#2 C:\xampp\htdocs\yii\framework\web\CController.php(872): CBaseController->renderFile('C:\\xampp\\htdocs...', Array, true)
+#3 C:\xampp\htdocs\yii\framework\web\CController.php(785): CController->renderPartial('view', Array, true)
+#4 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CController->render('view', Array)
+#5 [internal function]: CashierController->actionView('12')
+#6 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#7 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#12 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#14 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#15 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#17 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#18 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#19 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---
+2025/03/29 17:45:15 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+        ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+        ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = ?
+    GROUP BY p.id, p.nomor_registrasi, p.nama.
+in C:\xampp\htdocs\yii\protected\controllers\CashierController.php (90)
+in C:\xampp\htdocs\yii\index.php (13)
+2025/03/29 17:45:15 [error] [exception.CDbException] CDbException: CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '?
+    GROUP BY p.id, p.nomor_registrasi, p.nama' at line 13. The SQL statement executed was: SELECT 
+        p.id, 
+        p.nomor_registrasi, 
+        p.nama,
+        COALESCE(SUM(t.biaya),0) AS total_tindakan,
+        COALESCE(SUM(o.biaya),0) AS total_obat,
+        (COALESCE(SUM(t.biaya),0) + COALESCE(SUM(o.biaya),0)) AS total_outstanding
+    FROM pasien p
+    LEFT JOIN transaksi_tindakan t
+        ON p.id = t.pasien_id AND t.tanggal_bayar IS NULL
+    LEFT JOIN transaksi_obat_pasien o
+        ON p.id = o.pasien_id AND o.tanggal_bayar IS NULL
+    WHERE p.id = ?
+    GROUP BY p.id, p.nomor_registrasi, p.nama in C:\xampp\htdocs\yii\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\yii\framework\db\CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 C:\xampp\htdocs\yii\protected\controllers\CashierController.php(90): CDbCommand->queryRow(Array)
+#2 [internal function]: CashierController->actionView('12')
+#3 C:\xampp\htdocs\yii\framework\web\actions\CAction.php(114): ReflectionMethod->invokeArgs(Object(CashierController), Array)
+#4 C:\xampp\htdocs\yii\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(CashierController), Object(ReflectionMethod), Array)
+#5 C:\xampp\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(134): CController->runAction(Object(CInlineAction))
+#7 C:\xampp\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\yii\framework\web\CController.php(1148): CFilter->filter(Object(CFilterChain))
+#9 C:\xampp\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\xampp\htdocs\yii\framework\web\filters\CFilterChain.php(131): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\xampp\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('view')
+#14 C:\xampp\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('cashier/view')
+#15 C:\xampp\htdocs\yii\framework\base\CApplication.php(185): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\yii\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/yii/index.php?r=cashier/view&id=12
+HTTP_REFERER=http://localhost:8080/yii/index.php?r=cashier/index
+---

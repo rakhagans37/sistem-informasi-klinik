@@ -7,11 +7,11 @@ class TransaksiTindakan extends CActiveRecord
      * @param string $className active record class name.
      * @return TransaksiTindakan the static model class
      */
-    public static function model($className=__CLASS__)
+    public static function model($className = __CLASS__)
     {
         return parent::model($className);
     }
-  
+
     /**
      * @return string the associated database table name.
      */
@@ -19,45 +19,45 @@ class TransaksiTindakan extends CActiveRecord
     {
         return 'transaksi_tindakan';
     }
-  
+
     /**
      * @return array validation rules for model attributes.
      */
     public function rules()
     {
         return array(
-            // Pasien, wilayah, dan tanggal tindakan wajib diisi
+            // pasien_id, wilayah_id, dan tanggal_tindakan wajib diisi
             array('pasien_id, wilayah_id, tanggal_tindakan', 'required'),
             // Validasi numerik untuk kolom yang mengacu pada relasi
-            array('pasien_id, dokter_id, tindakan_id, wilayah_id', 'numerical', 'integerOnly'=>true),
-            // Biaya divalidasi sebagai numerik (desimal)
+            array('pasien_id, dokter_id, tindakan_id, wilayah_id', 'numerical', 'integerOnly' => true),
+            // Validasi numerik untuk biaya
             array('biaya', 'numerical'),
-            // Kolom lain dianggap aman untuk mass assignment
-            array('catatan, created_at, updated_at', 'safe'),
-            // Rules untuk pencarian (opsional)
-            array('id, pasien_id, dokter_id, tindakan_id, wilayah_id, tanggal_tindakan, catatan, biaya, created_at, updated_at', 'safe', 'on'=>'search'),
+            // Kolom lainnya dianggap aman untuk mass assignment
+            array('catatan, tanggal_bayar, created_at, updated_at', 'safe'),
+            // Rules untuk search scenario
+            array('id, pasien_id, dokter_id, tindakan_id, wilayah_id, tanggal_tindakan, tanggal_bayar, catatan, biaya, created_at, updated_at', 'safe', 'on' => 'search'),
         );
     }
-  
+
     /**
      * @return array relational rules.
      */
     public function relations()
     {
         return array(
-            // Relasi ke model Pasien melalui pasien_id
+            // Relasi ke model Pasien
             'pasien'   => array(self::BELONGS_TO, 'Pasien', 'pasien_id'),
-            // Relasi ke model Doctors melalui dokter_id
+            // Relasi ke model Doctors
             'dokter'   => array(self::BELONGS_TO, 'Doctors', 'dokter_id'),
-            // Relasi ke model MasterTindakan melalui tindakan_id
+            // Relasi ke model MasterTindakan
             'tindakan' => array(self::BELONGS_TO, 'MasterTindakan', 'tindakan_id'),
-            // Relasi ke model MasterWilayah melalui wilayah_id
+            // Relasi ke model MasterWilayah
             'wilayah'  => array(self::BELONGS_TO, 'MasterWilayah', 'wilayah_id'),
         );
     }
-  
+
     /**
-     * @return array customized attribute labels (name=>label)
+     * @return array customized attribute labels (name=>label).
      */
     public function attributeLabels()
     {
@@ -68,6 +68,7 @@ class TransaksiTindakan extends CActiveRecord
             'tindakan_id'      => 'Tindakan',
             'wilayah_id'       => 'Wilayah',
             'tanggal_tindakan' => 'Tanggal Tindakan',
+            'tanggal_bayar'    => 'Tanggal Bayar',
             'catatan'          => 'Catatan',
             'biaya'            => 'Biaya',
             'created_at'       => 'Dibuat',

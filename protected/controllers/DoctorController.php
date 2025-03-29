@@ -113,9 +113,12 @@ class DoctorController extends Controller
 
         if (isset($_POST['TransaksiObatPasien'])) {
             $doctor = Doctors::model()->findByPk($appointment->doctor_id);
+            $obat = MasterObat::model()->findByPk($_POST['TransaksiObatPasien']['obat_id']);
             $medicationModel->attributes = $_POST['TransaksiObatPasien'];
             $medicationModel->wilayah_id = $doctor->wilayah_id; // Ambil wilayah dari dokter
             $medicationModel->tanggal_pemberian = date('Y-m-d H:i:s'); // Set tanggal pemberian ke waktu saat ini
+            $biaya = $obat->harga * $medicationModel->jumlah; // Hitung biaya berdasarkan harga dan jumlah
+            $medicationModel->biaya = $biaya; // Set biaya ke model
             if ($medicationModel->save()) {
                 Yii::app()->user->setFlash('success', 'Obat berhasil diberikan.');
                 $this->redirect(array('doctor/detail', 'id' => $appointment->id));

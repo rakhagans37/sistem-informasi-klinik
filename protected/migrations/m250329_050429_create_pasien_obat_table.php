@@ -21,6 +21,8 @@ class m250329_050429_create_pasien_obat_table extends CDbMigration
 			'obat_id'           => 'integer',
 			'jumlah'            => 'integer NOT NULL',
 			'dosis'             => 'varchar(100)',
+			'tanggal_bayar'     => "timestamp NULL DEFAULT NULL",
+			'biaya'            => 'numeric(10,2)',
 			'wilayah_id'      => 'integer NOT NULL',
 			'tanggal_pemberian' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
 			'catatan'           => 'text',

@@ -362,4 +362,63 @@ class AdminController extends Controller
             'staffModel' => $staffModel,
         ));
     }
+
+    public function actionDashboard()
+    {
+        // Query untuk omzet per minggu (menggabungkan data dari transaksi_tindakan dan transaksi_obat_pasien yang belum dibayar)
+        $sqlOmzet = "SELECT CONCAT(YEAR(created_at), '-', WEEK(created_at)) AS minggu, SUM(biaya) AS total 
+                 FROM (
+                     SELECT created_at, biaya FROM transaksi_tindakan
+                     UNION ALL
+                     SELECT created_at, biaya FROM transaksi_obat_pasien
+                 ) AS sub
+                 GROUP BY CONCAT(YEAR(created_at), '-', WEEK(created_at))
+                 ORDER BY CONCAT(YEAR(created_at), '-', WEEK(created_at))";
+        $omzetData = Yii::app()->db->createCommand($sqlOmzet)->queryAll();
+
+        $omzetLabels = array();
+        $omzetValues = array();
+        foreach ($omzetData as $row) {
+            $omzetLabels[] = $row['minggu'];
+            $omzetValues[] = (float)$row['total'];
+        }
+
+        // Query untuk penjualan obat per minggu
+        $sqlObat = "SELECT CONCAT(YEAR(created_at), '-', WEEK(created_at)) AS minggu, COUNT(*) AS total 
+                FROM transaksi_obat_pasien 
+                GROUP BY CONCAT(YEAR(created_at), '-', WEEK(created_at))
+                ORDER BY CONCAT(YEAR(created_at), '-', WEEK(created_at))";
+        $obatData = Yii::app()->db->createCommand($sqlObat)->queryAll();
+
+        $obatLabels = array();
+        $obatValues = array();
+        foreach ($obatData as $row) {
+            $obatLabels[] = $row['minggu'];
+            $obatValues[] = (int)$row['total'];
+        }
+
+        // Query untuk tindakan per minggu
+        $sqlTindakan = "SELECT CONCAT(YEAR(created_at), '-', WEEK(created_at)) AS minggu, COUNT(*) AS total 
+                    FROM transaksi_tindakan 
+                    GROUP BY CONCAT(YEAR(created_at), '-', WEEK(created_at))
+                    ORDER BY CONCAT(YEAR(created_at), '-', WEEK(created_at))";
+        $tindakanData = Yii::app()->db->createCommand($sqlTindakan)->queryAll();
+
+        $tindakanLabels = array();
+        $tindakanValues = array();
+        foreach ($tindakanData as $row) {
+            $tindakanLabels[] = $row['minggu'];
+            $tindakanValues[] = (int)$row['total'];
+        }
+
+        // Kirim data ke view dalam format JSON agar Chart.js dapat memprosesnya
+        $this->render('dashboard', array(
+            'omzetLabels'    => json_encode($omzetLabels),
+            'omzetValues'    => json_encode($omzetValues),
+            'obatLabels'     => json_encode($obatLabels),
+            'obatValues'     => json_encode($obatValues),
+            'tindakanLabels' => json_encode($tindakanLabels),
+            'tindakanValues' => json_encode($tindakanValues),
+        ));
+    }
 }

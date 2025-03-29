@@ -17,6 +17,7 @@ class m250329_055608_create_pasien_tindakan_table extends CDbMigration
 			'tindakan_id'      => 'integer',
 			'wilayah_id'      => 'integer NOT NULL',
 			'tanggal_tindakan' => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",
+			'tanggal_bayar'     => "timestamp NULL DEFAULT NULL",
 			'catatan'          => 'text',
 			'biaya'            => 'numeric(10,2)',
 			'created_at'       => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP",

@@ -28,12 +28,16 @@ class TransaksiObatPasien extends CActiveRecord
         return array(
             // Pastikan pasien_id, jumlah, tanggal_pemberian, dan wilayah_id wajib diisi
             array('pasien_id, jumlah, tanggal_pemberian, wilayah_id', 'required'),
+            // Validasi numerik untuk field yang harus berupa integer
             array('pasien_id, dokter_id, obat_id, jumlah, wilayah_id', 'numerical', 'integerOnly' => true),
+            // Biaya divalidasi sebagai numerik (boleh desimal)
+            array('biaya', 'numerical'),
+            // Batasan panjang untuk dosis
             array('dosis', 'length', 'max' => 100),
-            // Atribut lain dianggap aman untuk mass assignment
+            // Field catatan, created_at, updated_at dianggap aman
             array('catatan, created_at, updated_at', 'safe'),
-            // Rule untuk pencarian (opsional)
-            array('id, pasien_id, dokter_id, obat_id, jumlah, dosis, tanggal_pemberian, catatan, created_at, updated_at, wilayah_id', 'safe', 'on' => 'search'),
+            // Rules untuk pencarian
+            array('id, pasien_id, dokter_id, obat_id, jumlah, dosis, tanggal_pemberian, catatan, biaya, created_at, updated_at, wilayah_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -55,7 +59,7 @@ class TransaksiObatPasien extends CActiveRecord
     }
 
     /**
-     * @return array customized attribute labels (name=>label)
+     * @return array customized attribute labels (name=>label).
      */
     public function attributeLabels()
     {
@@ -67,10 +71,12 @@ class TransaksiObatPasien extends CActiveRecord
             'jumlah'            => 'Jumlah',
             'dosis'             => 'Dosis',
             'tanggal_pemberian' => 'Tanggal Pemberian',
+            'tanggal_bayar'     => 'Tanggal Bayar',
             'catatan'           => 'Catatan',
+            'biaya'             => 'Biaya',
+            'wilayah_id'        => 'Wilayah',
             'created_at'        => 'Dibuat',
             'updated_at'        => 'Diupdate',
-            'wilayah_id'        => 'Wilayah',
         );
     }
 }

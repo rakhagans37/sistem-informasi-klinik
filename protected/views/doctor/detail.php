@@ -66,6 +66,7 @@ $pasien = $model->pasien;
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dosis</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Catatan</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Biaya</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -76,6 +77,7 @@ $pasien = $model->pasien;
                             <td class="px-6 py-4"><?php echo CHtml::encode($obat->jumlah); ?></td>
                             <td class="px-6 py-4"><?php echo CHtml::encode($obat->dosis); ?></td>
                             <td class="px-6 py-4"><?php echo CHtml::encode($obat->catatan); ?></td>
+                            <td class="px-6 py-4 text-right"><?php echo number_format($obat->biaya, 2, ',', '.'); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
