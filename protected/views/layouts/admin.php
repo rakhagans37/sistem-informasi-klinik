@@ -46,7 +46,7 @@
                         )); ?>
                     </li>
                     <li>
-                        <?php echo CHtml::link('User Management', array('/admin/userManagement'), array(
+                        <?php echo CHtml::link('User Management', array('/admin/userManagementIndex'), array(
                             'class' => ($currentRoute == 'admin/userManagement') ? 'text-sky-500 font-bold' : 'text-white hover:text-gray-300'
                         )); ?>
                     </li>

@@ -287,4 +287,79 @@ class AdminController extends Controller
             throw new CHttpException(404, 'Data yang diminta tidak ditemukan.');
         return $model;
     }
+
+    public function actionUserManagementIndex()
+    {
+        $dataProvider = new CActiveDataProvider('Users', array(
+            'criteria' => array(
+                'condition' => 'role_id != 1', // Hanya ambil pegawai (bukan admin)
+            ),
+            'pagination' => array(
+                'pageSize' => 10,
+            ),
+        ));
+
+        $this->render('userManagement/index', array(
+            'dataProvider' => $dataProvider,
+        ));
+    }
+
+    public function actionToggleActivation()
+    {
+        if (isset($_GET['id'])) {
+            $user = Users::model()->findByPk($_GET['id']);
+            if ($user) {
+                // Toggle is_active
+                $user->is_active = !$user->is_active;
+                if ($user->save()) {
+                    // Redirect ke halaman yang sesuai setelah berhasil
+                    $this->redirect(array('userManagementIndex'));
+                } else {
+                    throw new CHttpException(500, 'Gagal mengubah status pengguna.');
+                }
+            } else {
+                throw new CHttpException(404, 'Pengguna tidak ditemukan.');
+            }
+        } else {
+            throw new CHttpException(400, 'Permintaan tidak valid.');
+        }
+    }
+
+    public function actionUserManagementUpdate($id)
+    {
+        // Ambil model Users
+        $model = Users::model()->findByPk($id);
+        if ($model === null)
+            throw new CHttpException(404, 'User tidak ditemukan.');
+
+        // Muat model staff terkait berdasarkan role
+        if ($model->role_id == 2) { // Dokter
+            $staffModel = Doctors::model()->findByAttributes(array('user_id' => $model->id));
+        } elseif ($model->role_id == 3) { // Resepsionis
+            $staffModel = Recepsionists::model()->findByAttributes(array('user_id' => $model->id));
+        } elseif ($model->role_id == 4) { // Kasir
+            $staffModel = Cashiers::model()->findByAttributes(array('user_id' => $model->id));
+        } else {
+            $staffModel = null;
+        }
+
+        if ($staffModel === null) {
+            throw new CHttpException(404, 'Data staff terkait tidak ditemukan.');
+        }
+
+        if (isset($_POST['Users']['wilayah_id'])) {
+            $staffModel->wilayah_id = $_POST['Users']['wilayah_id'];
+            if ($staffModel->save()) {
+                Yii::app()->user->setFlash('success', 'Data user berhasil diperbarui.');
+                $this->redirect(array('userManagementIndex', 'id' => $model->id));
+            } else {
+                Yii::app()->user->setFlash('error', 'Gagal memperbarui data user.');
+            }
+        }
+
+        $this->render('userManagement/edit', array(
+            'model' => $model,
+            'staffModel' => $staffModel,
+        ));
+    }
 }

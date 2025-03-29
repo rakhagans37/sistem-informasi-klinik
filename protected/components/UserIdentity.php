@@ -20,6 +20,7 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode = self::ERROR_NONE;
 			// Simpan data tambahan ke state, misalnya role dan wilayah
 			Yii::app()->user->setState('role_id', $user->role_id);
+			Yii::app()->user->setState('is_active', $user->is_active);
 		}
 		return !$this->errorCode;
 	}
