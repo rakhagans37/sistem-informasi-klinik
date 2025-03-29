@@ -7,11 +7,11 @@ class TransaksiObatPasien extends CActiveRecord
      * @param string $className active record class name.
      * @return TransaksiObatPasien the static model class
      */
-    public static function model($className=__CLASS__)
+    public static function model($className = __CLASS__)
     {
         return parent::model($className);
     }
-  
+
     /**
      * @return string the associated database table name.
      */
@@ -19,38 +19,41 @@ class TransaksiObatPasien extends CActiveRecord
     {
         return 'transaksi_obat_pasien';
     }
-  
+
     /**
      * @return array validation rules for model attributes.
      */
     public function rules()
     {
         return array(
-            array('pasien_id, jumlah, tanggal_pemberian', 'required'),
-            array('pasien_id, dokter_id, obat_id, jumlah', 'numerical', 'integerOnly'=>true),
-            array('dosis', 'length', 'max'=>100),
+            // Pastikan pasien_id, jumlah, tanggal_pemberian, dan wilayah_id wajib diisi
+            array('pasien_id, jumlah, tanggal_pemberian, wilayah_id', 'required'),
+            array('pasien_id, dokter_id, obat_id, jumlah, wilayah_id', 'numerical', 'integerOnly' => true),
+            array('dosis', 'length', 'max' => 100),
             // Atribut lain dianggap aman untuk mass assignment
             array('catatan, created_at, updated_at', 'safe'),
-            // Rule untuk pencarian (jika dibutuhkan)
-            array('id, pasien_id, dokter_id, obat_id, jumlah, dosis, tanggal_pemberian, catatan, created_at, updated_at', 'safe', 'on'=>'search'),
+            // Rule untuk pencarian (opsional)
+            array('id, pasien_id, dokter_id, obat_id, jumlah, dosis, tanggal_pemberian, catatan, created_at, updated_at, wilayah_id', 'safe', 'on' => 'search'),
         );
     }
-  
+
     /**
      * @return array relational rules.
      */
     public function relations()
     {
         return array(
-            // Relasi ke model Pasien
-            'pasien' => array(self::BELONGS_TO, 'Pasien', 'pasien_id'),
-            // Relasi ke model Users untuk dokter
-            'dokter' => array(self::BELONGS_TO, 'Doctors', 'dokter_id'),
-            // Relasi ke model MasterObat
-            'obat' => array(self::BELONGS_TO, 'MasterObat', 'obat_id'),
+            // Relasi ke model Pasien melalui pasien_id
+            'pasien'   => array(self::BELONGS_TO, 'Pasien', 'pasien_id'),
+            // Relasi ke model Doctors melalui dokter_id
+            'dokter'   => array(self::BELONGS_TO, 'Doctors', 'dokter_id'),
+            // Relasi ke model MasterObat melalui obat_id
+            'obat'     => array(self::BELONGS_TO, 'MasterObat', 'obat_id'),
+            // Relasi ke model MasterWilayah melalui wilayah_id
+            'wilayah'  => array(self::BELONGS_TO, 'MasterWilayah', 'wilayah_id'),
         );
     }
-  
+
     /**
      * @return array customized attribute labels (name=>label)
      */
@@ -67,6 +70,7 @@ class TransaksiObatPasien extends CActiveRecord
             'catatan'           => 'Catatan',
             'created_at'        => 'Dibuat',
             'updated_at'        => 'Diupdate',
+            'wilayah_id'        => 'Wilayah',
         );
     }
 }
